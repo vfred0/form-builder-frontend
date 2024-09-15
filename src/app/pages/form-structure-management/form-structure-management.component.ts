@@ -26,15 +26,13 @@ export class FormStructureManagementComponent {
     protected formStructures: FormStructureResponseDto[] = [];
     protected dialogService = inject(NbDialogService);
     private readonly formStructureService = inject(FormStructureService);
-    private data: any;
 
     constructor() {
         this.formStructureService.getAll().subscribe(formStructures => this.formStructures = formStructures);
     }
 
     showFormStructureModal() {
-        this.dialogService.open(FormFormStructureComponent)
-            .onClose.subscribe( values => { console.log(values); });
+        this.dialogService.open(FormFormStructureComponent, { hasBackdrop : true});
     }
 }
 
