@@ -13,13 +13,12 @@ import {
     NbToastrService
 } from "@nebular/theme";
 import {FormStructureRequestDto} from "@core/dtos/form-structure/form-structure-request.dto";
-import {InputComponent} from "@shared/components/input/input.component";
 import {InputListComponent} from "@pages/input-management/input-list/input-list.component";
 
 @Component({
     selector: 'form-builder-form-form-structure',
     standalone: true,
-    imports: [NbLayoutModule, NbFormFieldModule, NbInputModule, ReactiveFormsModule, NbButtonGroupModule, NbButtonModule, NbCardModule, NbIconModule, InputComponent],
+    imports: [NbLayoutModule, NbFormFieldModule, NbInputModule, ReactiveFormsModule, NbButtonGroupModule, NbButtonModule, NbCardModule, NbIconModule],
     templateUrl: './form-form-structure.component.html',
     styles: `
       .form {
