@@ -1,0 +1,38 @@
+<nb-layout>
+    <nb-layout-column>
+        @for (formStructure of formStructures; track formStructure.name) {
+            <nb-card>
+                <nb-card-header>{{ formStructure.name }}
+                    <nb-tag status="primary" appearance="outline"
+                            text="{{formStructure.inputs.length}} inputs"></nb-tag>
+                </nb-card-header>
+                <nb-card-body>
+                    <p>{{ formStructure.description }}</p>
+                    <nb-list>
+                        <nb-list-item>
+                            @for (input of formStructure.inputs; track input.name) {
+                                <nb-card>
+                                    <nb-card-header>{{ input.name }}</nb-card-header>
+                                    <nb-card-body>
+                                        <p>{{ input.dataType }}</p>
+                                    </nb-card-body>
+                                </nb-card>
+                            <span>&nbsp;</span>
+                            }
+                        </nb-list-item>
+                    </nb-list>
+                </nb-card-body>
+                <nb-card-footer>
+                    <button nbButton status="primary" size="small">Editar <nb-icon icon="edit"></nb-icon> </button>
+                    <span>&nbsp;</span>
+                    <button nbButton status="danger" size="small">Eliminar <nb-icon icon="trash"></nb-icon>
+                    </button>
+                </nb-card-footer>
+            </nb-card>
+        }
+
+        <button (click)="showFormStructureModal()" nbButton status="primary" size="giant">Nuevo formulario <nb-icon icon="plus"></nb-icon></button>
+    
+    </nb-layout-column>
+
+</nb-layout>
