@@ -14,7 +14,7 @@ export class FormStructureService {
         return this.http.get<{ data: FormStructureResponseDto[] }>(this.API_URL).pipe(map(response => response.data));
     }
 
-    getById(id: number) {
+    getById(id: string) {
         return this.http.get<{
             data: FormStructureResponseDto
         }>(`${this.API_URL}/${id}`).pipe(map(response => response.data));
@@ -26,13 +26,13 @@ export class FormStructureService {
         }>(this.API_URL, formStructure).pipe(map(response => response.data));
     }
 
-    update(formStructure: FormStructureResponseDto, id: number) {
+    update(formStructure: FormStructureResponseDto, id: string) {
         return this.http.put<{
             data: FormStructureResponseDto
         }>(`${this.API_URL}/${id}`, formStructure).pipe(map(response => response.data));
     }
 
-    delete(id: number) {
+    delete(id: string) {
         return this.http.delete<{ data: any }>(`${this.API_URL}/${id}`).pipe(map(response => response.data));
     }
 
