@@ -11,11 +11,12 @@ import {
     NbToggleModule
 } from "@nebular/theme";
 import {FormStructureManagementComponent} from "@pages/form-structure-management/form-structure-management.component";
+import {InputManagementComponent} from "@pages/input-management/input-management.component";
 
 @Component({
     selector: 'form-builder-root',
     standalone: true,
-    imports: [RouterOutlet, NbCardModule, NbTabsetModule, NbLayoutModule, NbActionsModule, NbMenuModule, NbSidebarModule, NbToggleModule, NbButtonModule, FormStructureManagementComponent],
+    imports: [RouterOutlet, NbCardModule, NbTabsetModule, NbLayoutModule, NbActionsModule, NbMenuModule, NbSidebarModule, NbToggleModule, NbButtonModule, FormStructureManagementComponent, InputManagementComponent],
     template: `
         <nb-layout>
             <nb-layout-header>
@@ -28,7 +29,7 @@ import {FormStructureManagementComponent} from "@pages/form-structure-management
                         <form-builder-form-structure-management/>
                     </nb-tab>
                     <nb-tab tabTitle="Gestionar inputs">
-                        Gestionar inputs
+<!--                        <form-builder-input-management/>    -->
                     </nb-tab>
                 </nb-tabset>
             </nb-layout-column>
