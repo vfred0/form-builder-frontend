@@ -58,7 +58,7 @@ export class FormFormStructureComponent implements OnInit {
     }
 
     onSaveFormStructure() {
-        if (this.formGroup.valid) {
+        if (this.formGroup.valid && this.inputListComponent.multiSelectGroupValue.length > 0) {
 
             const inputs = this.inputListComponent.multiSelectGroupValue;
 
@@ -67,6 +67,7 @@ export class FormFormStructureComponent implements OnInit {
             console.log(formStructureRequest);
 
             if (this.isUpdate) {
+                console.log('update');
                 this.formStructureService.update(formStructureRequest.id!, formStructureRequest).subscribe(() => {
                     this.toastService.show('Form structure updated successfully', 'Success', {
                         position: NbGlobalPhysicalPosition.TOP_RIGHT,
@@ -75,6 +76,7 @@ export class FormFormStructureComponent implements OnInit {
                     this.refDialog.close();
                 });
             } else {
+                console.log('save');
                 this.formStructureService.save(formStructureRequest).subscribe(() => {
                     this.toastService.show('Form structure saved successfully', 'Success', {
                         position: NbGlobalPhysicalPosition.TOP_RIGHT,

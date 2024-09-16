@@ -2,7 +2,7 @@
     <nb-layout-column>
         @for (formStructure of formStructures; track formStructure.id) {
             <nb-card>
-                <nb-card-header>{{ formStructure.name }}
+                <nb-card-header>{{formStructure.id}} - {{ formStructure.name }}
                     <nb-tag status="primary" appearance="outline"
                             text="{{formStructure.inputs.length}} inputs"></nb-tag>
                 </nb-card-header>
