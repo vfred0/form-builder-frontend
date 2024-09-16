@@ -14,7 +14,10 @@
                                 <nb-card>
                                     <nb-card-header>{{ input.name }}</nb-card-header>
                                     <nb-card-body>
-                                        <p>{{ input.dataType }}</p>
+                                        <nb-tag-list>
+                                            <nb-tag status="primary" appearance="outline" text="{{input.dataType}}"></nb-tag>
+                                            <nb-tag status="success" appearance="outline" text="{{input.required ? 'Required' : 'Optional'}}"></nb-tag>
+                                        </nb-tag-list>
                                     </nb-card-body>
                                 </nb-card>
                             <span>&nbsp;</span>

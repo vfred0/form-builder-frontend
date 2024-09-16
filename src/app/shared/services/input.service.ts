@@ -13,20 +13,17 @@ export class InputService {
         return this.http.get<{ data: InputDto[] }>(this.API_URL).pipe(map(response => response.data));
     }
 
-    getById(id: string) {
-        return this.http.get<{ data: InputDto }>(`${this.API_URL}/${id}`).pipe(map(response => response.data));
-    }
-
     save(input: InputDto) {
-        return this.http.post<{ data: InputDto }>(this.API_URL, input);
+        return this.http.post<void>(this.API_URL, input);
     }
 
     update(input: InputDto, id: string) {
-        return this.http.put<{ data: InputDto }>(`${this.API_URL}/${id}`, input);
+        console.log(`update ${input} ${id}`);
+        return this.http.put<void>(`${this.API_URL}/${id}`, input);
     }
 
     delete(id: string) {
-        return this.http.delete<{ data: any }>(`${this.API_URL}/${id}`);
+        return this.http.delete<void>(`${this.API_URL}/${id}`);
     }
     
 

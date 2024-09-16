@@ -40,8 +40,6 @@ export class FormInputComponent implements OnInit {
   }
 
   onSaveInput() {
-    console.log(this.formGroup.value);
-
     if (this.formGroup.valid) {
       if (this.isUpdate) {
         this.inputService.update(this.formGroup.value as InputDto, this.inputDto.id!).subscribe(() => {
@@ -57,6 +55,7 @@ export class FormInputComponent implements OnInit {
             status: 'success'
           });
         });
+        console.log(`save ${this.formGroup.value as InputDto}`);
       }
     }
 
