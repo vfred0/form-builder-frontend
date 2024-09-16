@@ -29,7 +29,7 @@ import {InputManagementComponent} from "@pages/input-management/input-management
                         <form-builder-form-structure-management/>
                     </nb-tab>
                     <nb-tab tabTitle="Gestionar inputs">
-<!--                        <form-builder-input-management/>    -->
+                        <form-builder-input-management/>
                     </nb-tab>
                 </nb-tabset>
             </nb-layout-column>

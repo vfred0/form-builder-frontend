@@ -1,12 +1,10 @@
 <nb-card>
     <nb-card-header>Escoger inputs</nb-card-header>
-    @for (input of this.inputs; track input.id) {
-        <div class="inputs">
-            <nb-checkbox status="basic">{{ input.name }}</nb-checkbox>
-            <nb-tag-list>
-                <nb-tag status="primary" appearance="outline" text="{{input.dataType}}"></nb-tag>
-                <nb-tag status="success" appearance="outline" text="{{input.required ? 'Required' : 'Optional'}}"></nb-tag>
-            </nb-tag-list>
-        </div>
-    }
+    <nb-card-body>
+        <nb-button-group multiple (valueChange)="updateMultiSelectGroupValue($event)">
+            @for (input of this.inputs; track input.id) {
+            <button nbButtonToggle [pressed]="this.isPressed(input)" status="primary" size="small" [value]="input">{{ input.name }}</button>
+            }
+        </nb-button-group>
+        </nb-card-body>
 </nb-card>

@@ -1,8 +1,8 @@
 import {Component, inject} from '@angular/core';
-import {InputService} from "@shared/services/input.service";
-import {InputResponseDto} from "@core/dtos/input/input-response.dto";
-import {NbButtonModule, NbCardModule, NbIconModule, NbLayoutModule, NbTagModule} from "@nebular/theme";
-import {of} from "rxjs";
+import { InputService } from "@shared/services/input.service";
+import { NbButtonModule, NbCardModule, NbDialogService, NbGlobalPhysicalPosition, NbIconModule, NbLayoutModule, NbTagModule, NbToastrService } from "@nebular/theme";
+import { InputDto } from '@core/dtos/input.dto';
+import { FormInputComponent } from './form-input/form-input.component';
 
 @Component({
   selector: 'form-builder-input-management',
@@ -12,19 +12,42 @@ import {of} from "rxjs";
     NbCardModule,
     NbTagModule,
     NbButtonModule,
-    NbIconModule
+    NbIconModule,
   ],
   templateUrl: './input-management.component.html',
   styles: ``
 })
 export class InputManagementComponent {
+
   private inputService = inject(InputService);
-  protected inputs: InputResponseDto[] = [];
+  protected inputs: InputDto[] = [];
+  protected dialogService = inject(NbDialogService);
+  private readonly toastService = inject(NbToastrService);
 
   constructor() {
     this.inputService.getAll().subscribe(inputs => this.inputs = inputs);
   }
 
-  protected readonly OfflineAudioCompletionEvent = OfflineAudioCompletionEvent;
-  protected readonly of = of;
+  editInput(inputDto: InputDto) {
+    this.dialogService.open(FormInputComponent, { hasBackdrop: false, closeOnBackdropClick: false, context: { inputDto } })
+      .onClose.subscribe(() => {
+        this.inputService.getAll().subscribe(inputs => this.inputs = inputs);
+      });
+  }
+
+  deleteInput(id: string) {
+    this.inputService.delete(id).subscribe(() => {
+      this.toastService.show('Input deleted successfully', 'Success', {
+        position: NbGlobalPhysicalPosition.TOP_RIGHT,
+        status: 'success'
+      });
+    });
+  }
+
+  addInput() {
+    this.dialogService.open(FormInputComponent, { hasBackdrop: false, closeOnBackdropClick: false })
+      .onClose.subscribe(() => {
+        this.inputService.getAll().subscribe(inputs => this.inputs = inputs);
+      });
+  }
 }

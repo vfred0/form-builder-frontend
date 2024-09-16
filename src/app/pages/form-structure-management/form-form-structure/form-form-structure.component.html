@@ -3,9 +3,11 @@
     <nb-card-body class="form" [formGroup]="formGroup">
         <input [formControlName]="'name'" nbInput fullWidth placeholder="Nombre">
         <textarea [formControlName]="'description'" nbInput fullWidth placeholder="Descripcion"></textarea>
-        <button (click)="showInputsModal()" nbButton status="primary" size="giant">Insertar inputs <nb-icon icon="plus"></nb-icon></button>
+        <form-builder-input-list [values]="this.inputs" />
+
         <nb-button-group>
-            <button nbButton status="primary" size="small" (click)="onSaveFormStructure()">Guardar <nb-icon icon="save"></nb-icon> </button>
+            <button nbButton status="primary" size="small" (click)="onSaveFormStructure()">Guardar <nb-icon icon="save"></nb-icon>
+            </button>
         </nb-button-group>
 
     </nb-card-body>

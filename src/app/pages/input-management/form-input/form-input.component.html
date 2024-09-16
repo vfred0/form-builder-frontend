@@ -1,1 +1,18 @@
-<p>form-input works!</p>
+<nb-card class="form">
+    <nb-card-header>Formulario de estructura</nb-card-header>
+    <nb-card-body class="form" [formGroup]="formGroup">
+        <input [formControlName]="'name'" nbInput fullWidth placeholder="Nombre">
+        <nb-select [formControlName]="'dataType'" fullWidth>
+            <nb-option value="string">String</nb-option>
+            <nb-option value="number">Number</nb-option>
+            <nb-option value="boolean">Boolean</nb-option>
+        </nb-select>
+        <nb-toggle [formControlName]="'required'">Requerido</nb-toggle>
+        <nb-button-group>
+            <button nbButton status="primary" size="small" (click)="onSaveInput()">Guardar <nb-icon
+                    icon="save"></nb-icon>
+            </button>
+        </nb-button-group>
+
+    </nb-card-body>
+    </nb-card>
