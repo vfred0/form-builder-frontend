@@ -18,7 +18,6 @@ export class InputService {
     }
 
     update(input: InputDto, id: string) {
-        console.log(`update ${input} ${id}`);
         return this.http.put<void>(`${this.API_URL}/${id}`, input);
     }
 
