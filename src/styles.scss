@@ -3,3 +3,11 @@
     display: flex;
     gap: 1em;
 }
+
+.input-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1em;
+    justify-items: left;
+    padding: .5em;
+}
