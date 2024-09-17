@@ -7,11 +7,9 @@ import {
     NbComponentStatus,
     NbDialogRef,
     NbDialogService,
-    NbFormFieldModule,
     NbGlobalPhysicalPosition,
     NbIconModule,
     NbInputModule,
-    NbLayoutModule,
     NbToastrService
 } from "@nebular/theme";
 import { InputListComponent } from "@pages/input-management/input-list/input-list.component";
@@ -22,7 +20,7 @@ import { MessageType } from '@core/utils/messages.type';
 @Component({
     selector: 'form-builder-form-form-structure',
     standalone: true,
-    imports: [NbLayoutModule, NbFormFieldModule, NbInputModule, ReactiveFormsModule, NbButtonGroupModule, NbButtonModule, NbCardModule, NbIconModule, InputListComponent, NbButtonGroupModule],
+    imports: [NbInputModule, ReactiveFormsModule, NbButtonGroupModule, NbButtonModule, NbCardModule, NbIconModule, InputListComponent],
     templateUrl: './form-form-structure.component.html',
     styles: `
       .form {

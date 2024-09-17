@@ -3,4 +3,5 @@ export interface InputDto {
     name: string;
     dataType: string;
     required: boolean;
+    value?: string;
 }

@@ -47,11 +47,11 @@ export class FormInputComponent implements OnInit {
   onSaveInput() {
     if (this.formGroup.valid) {
       if (this.isUpdate) {
-        this.inputService.update({ ...this.formGroup.value, id: this.inputDto.id } as InputDto, this.inputDto.id!).subscribe(() => {
+        this.inputService.update({ ...this.formGroup.value, value: "", id: this.inputDto.id } as InputDto, this.inputDto.id!).subscribe(() => {
           this.showToastAndCloseDialog(MessageType.SUCCESS, 'success');
         });
       } else {
-        const inputDto = { ...this.formGroup.value, id: self.crypto.randomUUID() } as InputDto;
+        const inputDto = { ...this.formGroup.value, value: "", id: self.crypto.randomUUID() } as InputDto;
         this.inputService.save(inputDto).subscribe(() => {
           this.showToastAndCloseDialog(MessageType.SUCCESS, 'success');
         });

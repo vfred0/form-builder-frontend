@@ -17,6 +17,7 @@ import {
 } from "@pages/form-structure-management/form-form-structure/form-form-structure.component";
 import { FormStructureDto } from '@core/dtos/form-structure.dto';
 import { MessageType } from '@core/utils/messages.type';
+import { FormFormDataComponent } from '@pages/form-data-management/form-form-data.component';
 
 @Component({
     selector: 'form-builder-form-structure-management',
@@ -26,6 +27,9 @@ import { MessageType } from '@core/utils/messages.type';
     styles: ``
 })
 export class FormStructureManagementComponent {
+    showFormDataDialog(formStructure: FormStructureDto) {
+        this.dialogService.open(FormFormDataComponent, { hasBackdrop: false, closeOnBackdropClick: false, context: { formStructure } });
+    }
 
     protected formStructures: FormStructureDto[] = [];
     protected dialogService = inject(NbDialogService);

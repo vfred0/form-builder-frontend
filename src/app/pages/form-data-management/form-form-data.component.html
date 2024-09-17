@@ -1,0 +1,22 @@
+<nb-card>
+    <nb-card-header>Formulario de datos</nb-card-header>
+    <nb-card-body>
+        <form [formGroup]="formGroup">
+            @for (input of formStructure.inputs; track input.name) {
+            <div class="input-container">
+                <input [formControlName]="input.name" nbInput fullWidth [placeholder]="input.name" />
+                <nb-tag-list>
+                    <nb-tag status="primary" appearance="outline" text="{{input.dataType}}"></nb-tag>
+                    <nb-tag status="success" appearance="outline"
+                        text="{{input.required ? 'Required' : 'Optional'}}"></nb-tag>
+                </nb-tag-list>
+            </div>
+            }
+        </form>
+    </nb-card-body>
+    <nb-card-footer>
+        <button nbButton status="success" size="small" (click)="onSaveFormStructure()">Guardar <nb-icon
+                icon="save"></nb-icon>
+        </button>
+    </nb-card-footer>
+</nb-card>
