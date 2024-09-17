@@ -5,7 +5,7 @@ import { NbButtonGroupModule, NbButtonModule, NbCardModule, NbComponentStatus, N
 import { InputService } from '@shared/services/input.service';
 import { InputListComponent } from '../input-list/input-list.component';
 import { MessageType } from '@core/utils/messages.type';
-import { DataType } from '@core/models/data-type.type';
+import { DataType } from '@core/utils/data-type.type';
 
 @Component({
   selector: 'form-builder-form-input',
