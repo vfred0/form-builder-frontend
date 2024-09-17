@@ -16,6 +16,7 @@ import {
     FormFormStructureComponent
 } from "@pages/form-structure-management/form-form-structure/form-form-structure.component";
 import { FormStructureDto } from '@core/dtos/form-structure.dto';
+import { MessageType } from '@core/utils/messages.type';
 
 @Component({
     selector: 'form-builder-form-structure-management',
@@ -35,8 +36,8 @@ export class FormStructureManagementComponent {
         this.formStructureService.getAll().subscribe(formStructures => this.formStructures = formStructures);
     }
 
-    showFormStructureModal() {
-        this.dialogService.open(FormFormStructureComponent, { hasBackdrop: false, closeOnBackdropClick: false })
+    showFormStructureDialog(formStructure?: FormStructureDto) {
+        this.dialogService.open(FormFormStructureComponent, { hasBackdrop: false, closeOnBackdropClick: false, context: { formStructure } })
             .onClose.subscribe(() => {
                 this.formStructureService.getAll().subscribe(formStructures => this.formStructures = formStructures);
             });
@@ -47,14 +48,10 @@ export class FormStructureManagementComponent {
             this.formStructures = this.formStructures.filter(formStructure => formStructure.id !== id);
         });
 
-        this.toastService.show('Form structure deleted successfully', 'Success', {
+        this.toastService.show(MessageType.SUCCESS, 'Success', {
             position: NbGlobalPhysicalPosition.TOP_RIGHT,
             status: 'success'
         });
-    }
-
-    showEditFormStructureModal(formStructure: FormStructureDto) {
-        this.dialogService.open(FormFormStructureComponent, { hasBackdrop: false, closeOnBackdropClick: false, context: { formStructure } });
     }
 }
 

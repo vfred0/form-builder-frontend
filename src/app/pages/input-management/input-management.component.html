@@ -1,5 +1,5 @@
 <nb-layout-column>
-    @for (input of inputs; track input.name) {
+    @for (input of inputs; track input.id) {
     <nb-card>
         <nb-card-header>{{ input.name }}</nb-card-header>
         <nb-card-body>
@@ -10,14 +10,18 @@
             </nb-tag-list>
                 </nb-card-body>
             <nb-card-footer>
-                <button nbButton status="primary" size="small" (click)="this.editInput(input)">Editar <nb-icon icon="edit"></nb-icon>
-                </button>
-                <button nbButton status="danger" size="small" (click)="this.deleteInput(input.id!)">Eliminar <nb-icon
+                <div class="action-buttons">
+                    <button nbButton status="primary" size="small" (click)="this.showInputFormDialog(input)">Editar <nb-icon
+                            icon="edit"></nb-icon>
+                    </button>
+                    <button nbButton status="danger" size="small" (click)="this.deleteInput(input.id!)">Eliminar <nb-icon
                         icon="trash"></nb-icon>
-                </button>
+                    </button>
+                </div>
             </nb-card-footer>
 </nb-card>
 }
-<button nbButton status="primary" size="giant" (click)="this.addInput()">Agregar <nb-icon icon="plus"></nb-icon>
+<button nbButton status="primary" size="giant" (click)="this.showInputFormDialog()">Agregar <nb-icon
+        icon="plus"></nb-icon>
 </button>
 </nb-layout-column>

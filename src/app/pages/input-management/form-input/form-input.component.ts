@@ -1,9 +1,11 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { InputDto } from '@core/dtos/input.dto';
-import { NbButtonGroupModule, NbButtonModule, NbCardModule, NbDialogService, NbFormFieldModule, NbGlobalPhysicalPosition, NbIconModule, NbInputModule, NbLayoutModule, NbSelectModule, NbToastrService, NbToggleModule } from '@nebular/theme';
+import { NbButtonGroupModule, NbButtonModule, NbCardModule, NbComponentStatus, NbDialogRef, NbDialogService, NbFormFieldModule, NbGlobalPhysicalPosition, NbIconModule, NbInputModule, NbLayoutModule, NbSelectModule, NbToastrService, NbToggleModule } from '@nebular/theme';
 import { InputService } from '@shared/services/input.service';
 import { InputListComponent } from '../input-list/input-list.component';
+import { MessageType } from '@core/utils/messages.type';
+import { DataType } from '@core/models/data-type.type';
 
 @Component({
   selector: 'form-builder-form-input',
@@ -21,9 +23,12 @@ export class FormInputComponent implements OnInit {
   protected dialogService = inject(NbDialogService);
   private readonly inputService = inject(InputService);
   private readonly toastService = inject(NbToastrService);
+  private refDialog = inject(NbDialogRef);
   formGroup!: FormGroup;
   isUpdate: boolean = false;
   inputDto!: InputDto;
+  dataTypeOptions: DataType[] = Object.values(DataType);
+
   constructor() {
     this.formGroup = new FormGroup({
       name: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]),
@@ -42,23 +47,24 @@ export class FormInputComponent implements OnInit {
   onSaveInput() {
     if (this.formGroup.valid) {
       if (this.isUpdate) {
-        this.inputService.update(this.formGroup.value as InputDto, this.inputDto.id!).subscribe(() => {
-          this.toastService.show('Input updated successfully', 'Success', {
-            position: NbGlobalPhysicalPosition.TOP_RIGHT,
-            status: 'success'
-          });
+        this.inputService.update({ ...this.formGroup.value, id: this.inputDto.id } as InputDto, this.inputDto.id!).subscribe(() => {
+          this.showToastAndCloseDialog(MessageType.SUCCESS, 'success');
         });
       } else {
-        this.inputService.save(this.formGroup.value as InputDto).subscribe(() => {
-          this.toastService.show('Input created successfully', 'Success', {
-            position: NbGlobalPhysicalPosition.TOP_RIGHT,
-            status: 'success'
-          });
+        const inputDto = { ...this.formGroup.value, id: self.crypto.randomUUID() } as InputDto;
+        this.inputService.save(inputDto).subscribe(() => {
+          this.showToastAndCloseDialog(MessageType.SUCCESS, 'success');
         });
-        console.log(`save ${this.formGroup.value as InputDto}`);
       }
     }
+  }
 
+  showToastAndCloseDialog(message: MessageType, status: NbComponentStatus) {
+    this.toastService.show(message, 'Success', {
+      position: NbGlobalPhysicalPosition.TOP_RIGHT,
+      status
+    });
+    this.refDialog.close();
   }
 
 }

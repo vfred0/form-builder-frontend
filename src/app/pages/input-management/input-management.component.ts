@@ -3,6 +3,7 @@ import { InputService } from "@shared/services/input.service";
 import { NbButtonModule, NbCardModule, NbDialogService, NbGlobalPhysicalPosition, NbIconModule, NbLayoutModule, NbTagModule, NbToastrService } from "@nebular/theme";
 import { InputDto } from '@core/dtos/input.dto';
 import { FormInputComponent } from './form-input/form-input.component';
+import { MessageType } from '@core/utils/messages.type';
 
 @Component({
   selector: 'form-builder-input-management',
@@ -28,24 +29,18 @@ export class InputManagementComponent {
     this.inputService.getAll().subscribe(inputs => this.inputs = inputs);
   }
 
-  editInput(inputDto: InputDto) {
-    this.dialogService.open(FormInputComponent, { hasBackdrop: false, closeOnBackdropClick: false, context: { inputDto } })
-      .onClose.subscribe(() => {
-        this.inputService.getAll().subscribe(inputs => this.inputs = inputs);
-      });
-  }
-
   deleteInput(id: string) {
     this.inputService.delete(id).subscribe(() => {
-      this.toastService.show('Input deleted successfully', 'Success', {
+      this.toastService.show(MessageType.SUCCESS, 'Success', {
         position: NbGlobalPhysicalPosition.TOP_RIGHT,
         status: 'success'
       });
+      this.inputService.getAll().subscribe(inputs => this.inputs = inputs);
     });
   }
 
-  addInput() {
-    this.dialogService.open(FormInputComponent, { hasBackdrop: false, closeOnBackdropClick: false })
+  showInputFormDialog(inputDto?: InputDto) {
+    this.dialogService.open(FormInputComponent, { hasBackdrop: false, closeOnBackdropClick: false, context: { inputDto } })
       .onClose.subscribe(() => {
         this.inputService.getAll().subscribe(inputs => this.inputs = inputs);
       });

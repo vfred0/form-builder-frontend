@@ -3,9 +3,9 @@
     <nb-card-body class="form" [formGroup]="formGroup">
         <input [formControlName]="'name'" nbInput fullWidth placeholder="Nombre">
         <nb-select [formControlName]="'dataType'" fullWidth>
-            <nb-option value="string">String</nb-option>
-            <nb-option value="number">Number</nb-option>
-            <nb-option value="boolean">Boolean</nb-option>
+            @for (dataType of dataTypeOptions; track dataType) {
+            <nb-option [value]="dataType">{{dataType}}</nb-option>
+            }
         </nb-select>
         <nb-toggle [formControlName]="'required'">Requerido</nb-toggle>
         <nb-button-group>
@@ -15,4 +15,4 @@
         </nb-button-group>
 
     </nb-card-body>
-    </nb-card>
+</nb-card>

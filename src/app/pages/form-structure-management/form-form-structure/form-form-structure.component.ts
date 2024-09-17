@@ -4,6 +4,7 @@ import {
     NbButtonGroupModule,
     NbButtonModule,
     NbCardModule,
+    NbComponentStatus,
     NbDialogRef,
     NbDialogService,
     NbFormFieldModule,
@@ -17,6 +18,7 @@ import { InputListComponent } from "@pages/input-management/input-list/input-lis
 import { FormStructureService } from '@shared/services/form-structure.service';
 import { FormStructureDto } from "@core/dtos/form-structure.dto";
 import { InputDto } from '@core/dtos/input.dto';
+import { MessageType } from '@core/utils/messages.type';
 @Component({
     selector: 'form-builder-form-form-structure',
     standalone: true,
@@ -59,38 +61,26 @@ export class FormFormStructureComponent implements OnInit {
 
     onSaveFormStructure() {
         if (this.formGroup.valid && this.inputListComponent.multiSelectGroupValue.length > 0) {
-
             const inputs = this.inputListComponent.multiSelectGroupValue;
-
             const formStructureRequest: FormStructureDto = { ...this.formGroup.value, inputs, id: this.formStructure?.id } as FormStructureDto
-
-            console.log(formStructureRequest);
-
             if (this.isUpdate) {
-                console.log('update');
                 this.formStructureService.update(formStructureRequest.id!, formStructureRequest).subscribe(() => {
-                    this.toastService.show('Form structure updated successfully', 'Success', {
-                        position: NbGlobalPhysicalPosition.TOP_RIGHT,
-                        status: 'success'
-                    });
-                    this.refDialog.close();
+                    this.showToastAndCloseDialog(MessageType.SUCCESS, 'success');
                 });
             } else {
-                console.log('save');
                 this.formStructureService.save(formStructureRequest).subscribe(() => {
-                    this.toastService.show('Form structure saved successfully', 'Success', {
-                        position: NbGlobalPhysicalPosition.TOP_RIGHT,
-                        status: 'success'
-                    });
-                    this.refDialog.close();
+                    this.showToastAndCloseDialog(MessageType.SUCCESS, 'success');
                 });
             }
-        
         } else {
-            this.toastService.show('Form structure not saved', 'Error', {
-                position: NbGlobalPhysicalPosition.TOP_RIGHT,
-                status: 'danger'
-            });
+            this.showToastAndCloseDialog(MessageType.ERROR, 'danger');
         }
+    }
+    showToastAndCloseDialog(message: MessageType, status: NbComponentStatus) {
+        this.toastService.show(message, 'Success', {
+            position: NbGlobalPhysicalPosition.TOP_RIGHT,
+            status
+        });
+        this.refDialog.close();
     }
 }

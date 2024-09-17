@@ -1,0 +1,12 @@
+2024-09-16T20: 16: 53.448327779Z UpdateAsync  1 {
+    "Name": "Informaci\u00F3n Personal",
+    "Description": "Formulario de informaci\u00F3n personal",
+    "Inputs": [
+        {
+            "Id": "ee3ffd63-43ff-495f-aa1c-1bd39ced879f",
+            "Name": "Nombres",
+            "DataType": "string",
+            "Required": true
+        }
+    ]
+}
