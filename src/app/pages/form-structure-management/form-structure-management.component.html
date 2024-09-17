@@ -1,42 +1,38 @@
-<nb-layout-column>
-    @for (formStructure of formStructures; track formStructure.id) {
-    <nb-card>
-        <nb-card-header>{{ formStructure.name }}
-            <nb-tag status="primary" appearance="outline" text="{{formStructure.inputs.length}} inputs"></nb-tag>
-        </nb-card-header>
-        <nb-card-body>
-            <p>{{ formStructure.description }}</p>
-            <nb-list>
-                <nb-list-item>
-                    @for (input of formStructure.inputs; track input.id) {
-                    <nb-card>
-                        <nb-card-header>{{ input.name }}</nb-card-header>
-                        <nb-card-body>
-                            <nb-tag-list>
-                                <nb-tag status="primary" appearance="outline" text="{{input.dataType}}"></nb-tag>
-                                <nb-tag status="success" appearance="outline"
-                                    text="{{input.required ? 'Required' : 'Optional'}}"></nb-tag>
-                            </nb-tag-list>
-                        </nb-card-body>
-                    </nb-card>
-                    <span>&nbsp;</span>
-                    }
-                </nb-list-item>
-            </nb-list>
-        </nb-card-body>
-        <nb-card-footer>
-            <div class="action-buttons">
-                <button nbButton status="primary" size="small" (click)="showFormStructureDialog(formStructure)">Editar
-                    <nb-icon icon="edit"></nb-icon> </button>
-                <button nbButton status="danger" size="small" (click)="deleteFormStructure(formStructure.id!)">Eliminar
-                    <nb-icon icon="trash"></nb-icon>
-                </button>
-            </div>
-        </nb-card-footer>
-    </nb-card>
-    }
+@for (formStructure of formStructures; track formStructure.id) {
+<nb-card>
+    <nb-card-header>{{ formStructure.name }}
+        <nb-tag status="primary" appearance="outline" text="{{formStructure.inputs.length}} inputs"></nb-tag>
+    </nb-card-header>
+    <nb-card-body>
+        <p>{{ formStructure.description }}</p>
+        <nb-list>
+            <nb-list-item>
+                @for (input of formStructure.inputs; track input.id) {
+                <nb-card>
+                    <nb-card-header>{{ input.name }}</nb-card-header>
+                    <nb-card-body>
+                        <nb-tag-list>
+                            <nb-tag status="primary" appearance="outline" text="{{input.dataType}}"></nb-tag>
+                            <nb-tag status="success" appearance="outline"
+                                text="{{input.required ? 'Required' : 'Optional'}}"></nb-tag>
+                        </nb-tag-list>
+                    </nb-card-body>
+                </nb-card>
+                }
+            </nb-list-item>
+        </nb-list>
+    </nb-card-body>
+    <nb-card-footer>
+        <div class="action-buttons">
+            <button nbButton status="primary" size="small" (click)="showFormStructureDialog(formStructure)">Editar
+                <nb-icon icon="edit"></nb-icon> </button>
+            <button nbButton status="danger" size="small" (click)="deleteFormStructure(formStructure.id!)">Eliminar
+                <nb-icon icon="trash"></nb-icon>
+            </button>
+        </div>
+    </nb-card-footer>
+</nb-card>
+}
 
-    <button (click)="showFormStructureDialog()" nbButton status="primary" size="giant">Nuevo formulario <nb-icon
-            icon="plus"></nb-icon></button>
-
-</nb-layout-column>
+<button (click)="showFormStructureDialog()" nbButton status="primary" size="giant">Nuevo formulario <nb-icon
+        icon="plus"></nb-icon></button>
