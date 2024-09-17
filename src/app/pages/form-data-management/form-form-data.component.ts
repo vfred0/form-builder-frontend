@@ -38,7 +38,7 @@ export class FormFormDataComponent implements OnInit {
     if (this.formStructure) {
       this.isUpdate = true;
       this.formStructure.inputs.forEach(input => {
-        this.formGroup.addControl(input.name, new FormControl(input.value || (input.required ? null : undefined)));
+        this.formGroup.addControl(input.name, new FormControl(input.value));
       });
       
     }
